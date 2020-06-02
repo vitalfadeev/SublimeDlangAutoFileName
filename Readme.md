@@ -11,10 +11,10 @@ Set new file name from "module name" | "class Name" | "interface Name" | "struct
 ## Algo
 - Check for it is new unsaved file
 - Get name
--- Grep for "\<module name\>"
--- Grep for "\<class Name\>"
--- Grep for "\<interface Name\>"
--- Grep for "\<struct Name\>"
+- - Grep for "\<module name\>"
+- - Grep for "\<class Name\>"
+- - Grep for "\<interface Name\>"
+- - Grep for "\<struct Name\>"
 - Set tab name. It will be file name.
 
 
