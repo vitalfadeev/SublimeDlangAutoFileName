@@ -1,7 +1,7 @@
 # Sublime 3 Dlang Auto File Name
 
 Sublime 3 Dlang Auto File Name plugin. 
-Set new file name from "module name" | "class Name" | "interface Name" | "struct Name"
+Set name for new file. Detect from "module ...", "class ...", "interface ...", "struct ..."
 
 ## Demo
 
