@@ -67,6 +67,17 @@ def get_name_from_struct( view ):
         return name
 
 
+def get_name_from_enum( view ):
+    # "class ..."
+    extractions = []
+    regions = view.find_all( r"^enum[\s]+(\w+)", 0, r"\1", extractions )
+
+    if extractions:
+        name = extractions[ 0 ]
+        name = name.lower() + ".d"
+        return name
+
+
 def get_name_from_first_line( view ):
     line = view.substr( view.line( 0 ) )
     
@@ -104,6 +115,13 @@ class DlangAutoFileName( sublime_plugin.EventListener ):
 
             # struct Name
             name = get_name_from_struct( view )
+
+            if name:
+                view.set_name( name )
+                return
+
+            # struct Name
+            name = get_name_from_enum( view )
 
             if name:
                 view.set_name( name )
