@@ -15,6 +15,7 @@ Set name for new file. Detect from "module ...", "class ...", "interface ...", "
 - - Grep for "\<class Name\>"
 - - Grep for "\<interface Name\>"
 - - Grep for "\<struct Name\>"
+- - Grep for "\<void Name\>"
 - Set tab name. It will be file name.
 
 
