@@ -57,7 +57,7 @@ def get_name_from_interface( view ):
 
 
 def get_name_from_struct( view ):
-    # "class ..."
+    # "struct ..."
     extractions = []
     regions = view.find_all( r"^struct[\s]+(\w+)", 0, r"\1", extractions )
 
@@ -70,7 +70,7 @@ def get_name_from_struct( view ):
 def get_name_from_function( view ):
     # "void ...()"
     extractions = []
-    regions = view.find_all( r"^[\w]+[\s]+(\w+)", 0, r"\1", extractions )
+    regions = view.find_all( r"^[\w]+[\s]+(\w+)[\s]*\(", 0, r"\1", extractions )
 
     if extractions:
         name = extractions[ 0 ]
@@ -82,6 +82,26 @@ def get_name_from_enum( view ):
     # "class ..."
     extractions = []
     regions = view.find_all( r"^enum[\s]+(\w+)", 0, r"\1", extractions )
+
+    if extractions:
+        name = extractions[ 0 ]
+        name = name.lower() + ".d"
+        return name
+
+
+def get_name_from_template( view ):
+    # "template ..."
+    extractions = []
+    regions = view.find_all( r"^template[\s]+(\w+)", 0, r"\1", extractions )
+
+    if extractions:
+        name = extractions[ 0 ]
+        name = name.lower() + ".d"
+        return name
+
+    # "mixin template ..."
+    extractions = []
+    regions = view.find_all( r"^mixin[\s]+template[\s]+(\w+)", 0, r"\1", extractions )
 
     if extractions:
         name = extractions[ 0 ]
@@ -133,6 +153,13 @@ class DlangAutoFileName( sublime_plugin.EventListener ):
 
             # struct Name
             name = get_name_from_enum( view )
+
+            if name:
+                view.set_name( name )
+                return
+
+            # template Name
+            name = get_name_from_template( view )
 
             if name:
                 view.set_name( name )
